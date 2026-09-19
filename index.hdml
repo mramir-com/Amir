@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>James Carter — Full Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0a1428; color:#e8edf5; overflow-x:hidden; }
+  a { text-decoration:none; color:inherit; }
+  .container { width:min(1150px,92%); margin:0 auto; }
+
+  /* ===== NAV ===== */
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:14px 0; background:rgba(8,18,38,.55); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,.05); }
+  .nav-inner { display:flex; align-items:center; justify-content:space-between; }
+  .logo { font-weight:800; font-size:20px; }
+  .logo span { color:#4f8dff; }
+  .nav-links { display:flex; gap:34px; align-items:center; list-style:none; }
+  .nav-links a { font-size:13.5px; color:#c6cfdd; font-weight:500; transition:.25s; }
+  .nav-links a:hover, .nav-links a.active { color:#fff; }
+  .nav-links a.active { font-weight:700; }
+  .btn { display:inline-flex; align-items:center; gap:8px; padding:11px 24px; border-radius:8px; font-size:13.5px; font-weight:600; transition:.25s; cursor:pointer; border:none; font-family:inherit; }
+  .btn-primary { background:linear-gradient(135deg,#2f7bff,#1d5fe0); color:#fff; box-shadow:0 6px 22px rgba(47,123,255,.35); }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(47,123,255,.5); }
+  .btn-ghost { background:transparent; border:1px solid rgba(255,255,255,.25); color:#e8edf5; }
+  .btn-ghost:hover { border-color:#4f8dff; color:#4f8dff; }
+
+  /* ===== HERO ===== */
+  .hero { min-height:100vh; display:flex; align-items:center; position:relative; padding:120px 0 60px;
+    background:
+      linear-gradient(to bottom, rgba(8,17,36,.35) 40%, #0a1428 96%),
+      radial-gradient(ellipse 90% 55% at 50% 28%, #3a6db8 0%, #2a5494 40%, #16294d 100%);
+  }
+  .hero-mountains { position:absolute; inset:0; pointer-events:none; }
+  .hero-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; position:relative; z-index:2; }
+  .hello { color:#8fb6ff; font-size:15px; font-weight:500; margin-bottom:14px; }
+  .hero h1 { font-size:clamp(38px,5.2vw,60px); font-weight:800; line-height:1.12; letter-spacing:-1px; }
+  .hero h1 .accent { color:#cfe0ff; }
+  .hero p { color:#b9c4d6; margin:22px 0 30px; font-size:15.5px; line-height:1.7; max-width:440px; }
+  .hero-btns { display:flex; gap:14px; margin-bottom:38px; }
+  .trusted { color:#9aa7bd; font-size:12.5px; margin-bottom:14px; }
+  .logos { display:flex; gap:30px; align-items:center; opacity:.85; }
+  .logo-item { font-weight:700; font-size:16px; color:#d7deea; display:flex; align-items:center; gap:7px; }
+  .lg-shopify::before{content:'☘'; color:#7fd08f;}
+  .lg-google { font-family:Arial; }
+  .lg-google .g{color:#4f8dff}.lg-google .o1{color:#ff6b6b}.lg-google .o2{color:#ffc75f}.lg-google .l{color:#7fd08f}.lg-google .e{color:#ff6b6b}
+  .lg-airbnb { color:#ff5a5f; }
+  .lg-msft span{ display:inline-block; width:9px; height:9px; margin:1px; }
+  .hero-photo { position:relative; display:flex; justify-content:center; }
+  .photo-card { width:min(360px,80%); aspect-ratio:3/3.8; border-radius:220px 220px 24px 24px; overflow:hidden; position:relative;
+    background:linear-gradient(160deg,#2b4f86 0%, #1b3560 55%, #122442 100%);
+    border:1px solid rgba(143,182,255,.25);
+    box-shadow:0 30px 80px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.04); }
+  .photo-card svg { width:100%; height:100%; display:block; }
+
+  /* ===== SECTION COMMON ===== */
+  section { padding:90px 0; }
+  .kicker { color:#4f8dff; font-size:12px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:12px; }
+  .sec-title { font-size:clamp(26px,3.4vw,36px); font-weight:800; letter-spacing:-.5px; line-height:1.2; }
+
+  /* ===== ABOUT ===== */
+  .about-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:50px; align-items:start; }
+  .about-text p { color:#a9b4c8; font-size:14.5px; line-height:1.75; margin:18px 0 26px; max-width:480px; }
+  .chips { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:28px; }
+  .chip { display:flex; align-items:center; gap:10px; color:#c4cede; font-size:13.5px; }
+  .chip .dot { width:20px; height:20px; border-radius:50%; background:rgba(79,141,255,.15); border:1px solid rgba(79,141,255,.5); display:flex; align-items:center; justify-content:center; color:#4f8dff; font-size:11px; flex-shrink:0; }
+  .info-card { background:#101d36; border:1px solid rgba(255,255,255,.07); border-radius:16px; padding:34px 30px; }
+  .info-row { display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(255,255,255,.06); }
+  .info-row:last-child { border-bottom:none; }
+  .info-icon { width:38px; height:38px; border-radius:10px; background:rgba(79,141,255,.12); display:flex; align-items:center; justify-content:center; color:#4f8dff; flex-shrink:0; }
+  .info-label { color:#7e8ba1; font-size:11.5px; text-transform:uppercase; letter-spacing:1px; }
+  .info-value { color:#eef2f9; font-size:14.5px; font-weight:600; margin-top:3px; }
+
+  /* ===== SERVICES ===== */
+  .services-head { text-align:center; margin-bottom:50px; }
+  .services-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  .service-card { background:#101d36; border:1px solid rgba(255,255,255,.07); border-radius:14px; padding:30px 24px; transition:.3s; }
+  .service-card:hover { transform:translateY(-6px); border-color:rgba(79,141,255,.45); box-shadow:0 18px 44px rgba(0,0,0,.4); }
+  .service-icon { width:46px; height:46px; border-radius:10px; background:rgba(79,141,255,.13); color:#4f8dff; display:flex; align-items:center; justify-content:center; margin-bottom:20px; }
+  .service-card h3 { font-size:16.5px; font-weight:700; margin-bottom:10px; }
+  .service-card p { color:#98a4ba; font-size:13px; line-height:1.65; }
+
+  /* ===== PROJECTS ===== */
+  .projects-head { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; }
+  .view-all { color:#4f8dff; font-size:13.5px; font-weight:600; }
+  .projects-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .project-card { background:#101d36; border:1px solid rgba(255,255,255,.07); border-radius:16px; overflow:hidden; transition:.3s; }
+  .project-card:hover { transform:translateY(-6px); border-color:rgba(79,141,255,.45); }
+  .project-thumb { height:190px; position:relative; overflow:hidden; }
+  .project-thumb svg { width:100%; height:100%; display:block; }
+  .project-body { padding:22px 24px 26px; }
+  .project-tag { color:#4f8dff; font-size:11.5px; font-weight:600; margin-bottom:6px; }
+  .project-body h3 { font-size:17px; font-weight:700; margin-bottom:6px; }
+  .project-body p { color:#8b97ad; font-size:12.5px; }
+  .project-link { color:#6f9dff; font-size:12.5px; font-weight:600; margin-top:10px; display:inline-block; }
+
+  /* ===== CTA ===== */
+  .cta { position:relative; text-align:center; padding:110px 0;
+    background:linear-gradient(to bottom,#0a1428 0%, rgba(31,64,120,.85) 50%, #0a1428 100%); }
+  .cta h2 { font-size:clamp(26px,3.4vw,36px); font-weight:800; margin-bottom:14px; }
+  .cta p { color:#b3bed1; font-size:15px; margin-bottom:28px; }
+
+  /* ===== FOOTER ===== */
+  footer { border-top:1px solid rgba(255,255,255,.07); padding:30px 0; }
+  .footer-inner { display:flex; justify-content:space-between; align-items:center; }
+  .footer-logo { font-weight:800; font-size:16px; }
+  .footer-copy { color:#76839b; font-size:12.5px; }
+  .socials { display:flex; gap:12px; }
+  .socials a { width:32px; height:32px; border-radius:8px; background:#14233f; display:flex; align-items:center; justify-content:center; color:#9fb3d4; font-size:13px; transition:.25s; }
+  .socials a:hover { background:#2f7bff; color:#fff; }
+
+  @media (max-width:960px){
+    .hero-grid, .about-grid { grid-template-columns:1fr; }
+    .services-grid { grid-template-columns:1fr 1fr; }
+    .projects-grid { grid-template-columns:1fr; }
+    .nav-links { display:none; }
+  }
+  @media (max-width:560px){ .services-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <div class="logo">James<span> Carter</span></div>
+    <ul class="nav-links">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="btn btn-primary" style="padding:9px 20px;">Hire Me</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="hello">Hello, I'm</div>
+      <h1>James Carter<br><span class="accent">Full Stack Developer</span></h1>
+      <p>I build exceptional digital experiences for businesses in Canada and around the world.</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View My Work &#8594;</a>
+        <a href="#contact" class="btn btn-ghost">&#9993; Contact Me</a>
+      </div>
+      <div class="trusted">Trusted by companies in Canada</div>
+      <div class="logos">
+        <span class="logo-item lg-shopify">shopify</span>
+        <span class="logo-item lg-google"><span class="g">G</span><span class="o1">o</span><span class="o2">o</span><span class="g">g</span><span class="l">l</span><span class="e">e</span></span>
+        <span class="logo-item lg-airbnb">&#9825; airbnb</span>
+        <span class="logo-item lg-msft"><span style="background:#ff6b6b"></span><span style="background:#7fd08f"></span><span style="background:#4f8dff"></span><span style="background:#ffc75f"></span> Microsoft</span>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <div class="photo-card">
+        <svg viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#4a7ec7"/><stop offset="1" stop-color="#22406f"/>
+            </linearGradient>
+          </defs>
+          <rect width="300" height="380" fill="url(#g1)"/>
+          <ellipse cx="150" cy="340" rx="120" ry="60" fill="#1a3566" opacity="0"/>
+          <!-- person silhouette -->
+          <circle cx="150" cy="128" r="52" fill="#132441"/>
+          <path d="M150 175 C 92 182 60 230 58 380 L 242 380 C 240 230 208 182 150 175 Z" fill="#132441"/>
+          <path d="M150 175 C 92 182 60 230 58 380 L 242 380 C 240 230 208 182 150 175 Z" fill="rgba(79,141,255,0.08)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container about-grid">
+    <div class="about-text">
+      <div class="kicker">About Me</div>
+      <h2 class="sec-title">Building Solutions That<br>Make an Impact</h2>
+      <p>I'm a passionate Full Stack Developer based in Toronto, Canada. I specialize in building scalable web applications using modern technologies. With a strong eye for design and a love for clean code, I help businesses bring their ideas to life.</p>
+      <div class="chips">
+        <div class="chip"><span class="dot">&#10003;</span> 5+ Years of Experience</div>
+        <div class="chip"><span class="dot">&#10003;</span> Available for Freelance</div>
+        <div class="chip"><span class="dot">&#10003;</span> 50+ Projects Completed</div>
+        <div class="chip"><span class="dot">&#10003;</span> Clients Worldwide</div>
+      </div>
+      <a href="#" class="btn btn-primary">Download CV &#8681;</a>
+    </div>
+    <div class="info-card">
+      <div class="info-row"><div class="info-icon">&#9906;</div><div><div class="info-label">Location</div><div class="info-value">Toronto, Canada</div></div></div>
+      <div class="info-row"><div class="info-icon">&#9993;</div><div><div class="info-label">Email</div><div class="info-value">hello@jamescarter.dev</div></div></div>
+      <div class="info-row"><div class="info-icon">&#9742;</div><div><div class="info-label">Phone</div><div class="info-value">+1 (647) 123-4567</div></div></div>
+      <div class="info-row"><div class="info-icon">&#9737;</div><div><div class="info-label">Languages</div><div class="info-value">English, French</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="padding-top:20px;">
+  <div class="container">
+    <div class="services-head">
+      <div class="kicker" style="text-align:center;">My Services</div>
+      <h2 class="sec-title">What I Can Do For You</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card"><div class="service-icon">&lt;/&gt;</div><h3>Web Development</h3><p>Custom websites and web applications built with the latest technologies.</p></div>
+      <div class="service-card"><div class="service-icon">&#128241;</div><h3>Responsive Design</h3><p>Mobile-first designs that look great on all devices and screen sizes.</p></div>
+      <div class="service-card"><div class="service-icon">&#128640;</div><h3>Performance Optimization</h3><p>Improve website speed and performance for better SEO and user experience.</p></div>
+      <div class="service-card"><div class="service-icon">&#128737;</div><h3>Website Maintenance</h3><p>Ongoing support and maintenance to keep your website running smoothly.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="projects-head">
+      <div><div class="kicker">Featured Projects</div></div>
+      <a href="#" class="view-all">View All Projects &#8594;</a>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-thumb"><svg viewBox="0 0 400 220" preserveAspectRatio="none"><rect width="400" height="220" fill="#173055"/><rect x="30" y="50" width="340" height="140" rx="8" fill="#22467e"/><rect x="50" y="70" width="150" height="12" rx="6" fill="#4f8dff" opacity=".8"/><rect x="50" y="95" width="220" height="8" rx="4" fill="#7ea6e8" opacity=".5"/><rect x="50" y="112" width="190" height="8" rx="4" fill="#7ea6e8" opacity=".35"/><rect x="50" y="140" width="90" height="26" rx="6" fill="#2f7bff"/></svg></div>
+        <div class="project-body">
+          <div class="project-tag">E-Commerce Platform</div>
+          <h3>Modern Online Store</h3>
+          <p>Shopify / React / Node.js</p>
+          <a href="#" class="project-link">View Case Study &#8594;</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb"><svg viewBox="0 0 400 220" preserveAspectRatio="none"><rect width="400" height="220" fill="#1b3a63"/><path d="M0 220 L120 120 L220 180 L320 90 L400 160 L400 220 Z" fill="#2a5494"/><circle cx="330" cy="45" r="22" fill="#ffc75f" opacity=".85"/><rect x="40" y="60" width="180" height="14" rx="7" fill="#fff" opacity=".85"/><rect x="40" y="85" width="130" height="9" rx="4" fill="#cfe0ff" opacity=".6"/></svg></div>
+        <div class="project-body">
+          <div class="project-tag">Real Estate Website</div>
+          <h3>Find Your Dream Home in Canada</h3>
+          <p>Next.js / Tailwind CSS</p>
+          <a href="#" class="project-link">View Case Study &#8594;</a>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-thumb"><svg viewBox="0 0 400 220" preserveAspectRatio="none"><rect width="400" height="220" fill="#0f2547"/><rect x="70" y="20" width="260" height="180" rx="10" fill="#16345f"/><rect x="90" y="45" width="8" height="120" fill="#4f8dff" opacity=".9"/><rect x="110" y="120" width="30" height="45" fill="#2f7bff"/><rect x="150" y="95" width="30" height="70" fill="#5f9dff"/><rect x="190" y="135" width="30" height="30" fill="#7fd08f"/><rect x="230" y="70" width="30" height="95" fill="#ffc75f"/><rect x="270" y="110" width="30" height="55" fill="#ff6b6b"/><rect x="90" y="178" width="240" height="4" fill="#3a6db8" opacity=".5"/></svg></div>
+        <div class="project-body">
+          <div class="project-tag">Business Dashboard</div>
+          <h3>Analytics &amp; Reporting Suite</h3>
+          <p>Vue.js / Laravel / MySQL</p>
+          <a href="#" class="project-link">View Case Study &#8594;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="container">
+    <h2>Let's Work Together</h2>
+    <p>Have a project in mind? I'd love to hear about it.<br>Let's create something amazing together.</p>
+    <a href="mailto:hello@jamescarter.dev" class="btn btn-primary">Get In Touch &#8594;</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div><div class="footer-logo">James Carter</div><div style="color:#76839b;font-size:11.5px;">Full Stack Developer</div></div>
+    <div class="footer-copy">&copy; 2024 James Carter. All rights reserved.</div>
+    <div class="socials"><a href="#">in</a><a href="#">&#9881;</a><a href="#">&#120143;</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
